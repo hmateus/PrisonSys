@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">#{msg['jailsysweb.pessoa.titulo.consulta.label']}</ui:define>
+
+	<ui:define name="corpo">
+		<h:form prependId="false">
+			<p:dataTable paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				var="pessoa" value="#{pessoaBean.listarItensAtivos()}">
+				<p:column filterBy="#{pessoa.nome}" filterMatchMode="contains"
+					headerText="#{msg['jailsysweb.pessoa.grid.consulta.label.nome']}">
+					<h:outputText value="#{pessoa.nome}" />
+				</p:column>
+				<p:column filterBy="#{pessoa.cpf}" filterMatchMode="contains"
+					headerText="#{msg['jailsysweb.pessoa.grid.consulta.label.cpf']}">
+					<h:outputText value="#{pessoa.cpf}" />
+				</p:column>
+				<p:column
+					headerText="#{msg['jailsysweb.pessoa.grid.consulta.label.opcoes']}">
+					<p:commandButton action="#{pessoaBean.visualizar()}"
+						icon="ui-icon-image" ajax="false">
+						<f:param name="idPessoa" value="#{pessoa.id}" />
+					</p:commandButton>
+					<p:commandButton action="#{pessoaBean.prepararEdicao()}"
+						icon="ui-icon-pencil" ajax="false">
+						<f:param name="idPessoa" value="#{pessoa.id}" />
+					</p:commandButton>
+					<p:commandButton action="#{pessoaBean.excluir(pessoa)}"
+						icon="ui-icon-trash" ajax="false" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
