@@ -2,7 +2,7 @@ package br.com.jailsys.model;
 
 public enum Severidade {
     Baixa("Baixa"),
-    Media("Média"),
+    Média("Média"),
     Alta("Alta");
 
     private String descricao;

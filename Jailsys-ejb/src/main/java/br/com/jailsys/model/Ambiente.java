@@ -2,11 +2,16 @@ package br.com.jailsys.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -39,13 +44,13 @@ public class Ambiente extends EntidadeComum implements Serializable {
     @Column(nullable = false)
     private boolean ativo;
 
-    /*
-     * @ManyToMany
-     * 
-     * @JoinTable(name = "atividadeAmbiente", joinColumns = @JoinColumn(name =
-     * "idAmbiente"), inverseJoinColumns = @JoinColumn(name = "idAtividade"))
-     * private List<Atividade> atividadeAmbiente;
-     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "atividadeAmbiente",
+            joinColumns = @JoinColumn(name = "idAmbiente"),
+            inverseJoinColumns = @JoinColumn(name = "idAtividade"))
+    
+    private List<Atividade> atividades;
+    
     public String getNome() {
         return nome;
     }
@@ -101,4 +106,12 @@ public class Ambiente extends EntidadeComum implements Serializable {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+	public List<Atividade> getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(List<Atividade> atividades) {
+		this.atividades = atividades;
+	}
 }

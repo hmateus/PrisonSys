@@ -27,12 +27,27 @@
 						icon="ui-icon-image" ajax="false">
 						<f:param name="idPessoa" value="#{pessoa.id}" />
 					</p:commandButton>
+
 					<p:commandButton action="#{pessoaBean.prepararEdicao()}"
 						icon="ui-icon-pencil" ajax="false">
 						<f:param name="idPessoa" value="#{pessoa.id}" />
 					</p:commandButton>
-					<p:commandButton action="#{pessoaBean.excluir(pessoa)}"
-						icon="ui-icon-trash" ajax="false" />
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir" type="button"
+						onclick="PF('confirmacao').show();" />
+
+					<p:dialog header="Confirmação" widgetVar="confirmacao" modal="true"
+						height="120">
+						<div>
+							<h:outputText value="Deseja realmente excluir?" />
+						</div>
+						<div align="center">
+							<br />
+							<p:commandButton value="Sim"
+								action="#{pessoaBean.excluir(pessoa)}" ajax="false" />
+							<p:commandButton value="Não" onclick="PF('confirmacao').close();" />
+						</div>
+					</p:dialog>
 				</p:column>
 			</p:dataTable>
 		</h:form>

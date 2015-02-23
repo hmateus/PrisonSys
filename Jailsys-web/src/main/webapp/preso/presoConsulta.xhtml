@@ -18,22 +18,22 @@
 				rowsPerPageTemplate="5,10,15">
 
 				<p:column
-					headerText="#{msg['jailsysweb.pessoa.form.cadastro.label.nome']}"
+					headerText="#{msg['jailsysweb.preso.form.cadastro.label.nome']}"
 					sortBy="#{preso.nome}" filterBy="#{preso.nome}">
 					<h:outputText value="#{preso.nome}" />
 				</p:column>
 				<p:column
-					headerText="#{msg['jailsysweb.pessoa.form.cadastro.label.codigo']}"
+					headerText="#{msg['jailsysweb.preso.form.cadastro.label.codigo']}"
 					sortBy="#{preso.codigo}" filterBy="#{preso.codigo}">
 					<h:outputText value="#{preso.codigo}" />
 				</p:column>
 				<p:column
-					headerText="#{msg['jailsysweb.pessoa.form.cadastro.label.cpf']}"
+					headerText="#{msg['jailsysweb.preso.form.cadastro.label.cpf']}"
 					sortBy="#{preso.cpf}" filterBy="#{preso.cpf}">
 					<h:outputText value="#{preso.cpf}" />
 				</p:column>
 				<p:column
-					headerText="#{msg['jailsysweb.pessoa.form.cadastro.label.dataPrisao']}"
+					headerText="#{msg['jailsysweb.preso.form.cadastro.label.dataPrisao']}"
 					sortBy="#{preso.dataPrisao}">
 					<h:outputText value="#{preso.dataPrisao}">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -46,14 +46,29 @@
 						action="#{presoBean.visualizar()}" ajax="false">
 						<f:param name="idPreso" value="#{preso.id}"></f:param>
 					</p:commandButton>
+
 					<p:commandButton icon="ui-icon-pencil"
 						action="#{presoBean.prepararEdicao()}" ajax="false">
 						<f:param name="idPreso" value="#{preso.id}"></f:param>
 					</p:commandButton>
-					<p:commandButton icon="ui-icon-trash"
-						action="#{presoBean.excluir(preso)}" ajax="false">
-						<f:param value="#{preso.id}"></f:param>
-					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir" type="button"
+						onclick="PF('confirmacao').show();" />
+
+					<p:dialog header="Confirmação" widgetVar="confirmacao" modal="true"
+						height="120">
+						<div>
+							<h:outputText value="Deseja realmente excluir?" />
+						</div>
+						<div align="center">
+							<br />
+							<p:commandButton value="Sim" action="#{presoBean.excluir(preso)}"
+								ajax="false">
+								<f:param value="#{preso.id}"></f:param>
+							</p:commandButton>
+							<p:commandButton value="Não" onclick="PF('confirmacao').close();"></p:commandButton>
+						</div>
+					</p:dialog>
 				</p:column>
 			</p:dataTable>
 		</h:form>

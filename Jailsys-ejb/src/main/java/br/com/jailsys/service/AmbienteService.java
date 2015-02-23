@@ -21,6 +21,10 @@ public class AmbienteService implements AbstractService<EntidadeComum>,
         return ambienteDao.listar();
     }
     
+    public List<Ambiente> listarPorAtivo(){
+    	return ambienteDao.listarItensAtivos();
+    }
+    
     @Override
     public void salvar(EntidadeComum entidade) {
         ambienteDao.salvar((Ambiente) entidade);
@@ -40,13 +44,16 @@ public class AmbienteService implements AbstractService<EntidadeComum>,
 
     @Override
     public void excluir(Long id) {
-        // TODO Auto-generated method stub
+    	Ambiente entidade = ambienteDao.buscar(id);
+        entidade.setAtivo(Boolean.FALSE);
+        ambienteDao.editar(entidade);
 
     }
 
     @Override
     public void excluir(EntidadeComum entidade) {
-        // TODO Auto-generated method stub
+    	((Ambiente) entidade).setAtivo(Boolean.FALSE);
+        ambienteDao.editar((Ambiente) entidade);
 
     }
 
