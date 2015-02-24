@@ -60,4 +60,12 @@ public class Atividade extends EntidadeComum {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+	public List<Ambiente> getAmbientes() {
+		return ambientes;
+	}
+
+	public void setAmbientes(List<Ambiente> ambientes) {
+		this.ambientes = ambientes;
+	}
 }

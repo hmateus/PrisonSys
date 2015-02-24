@@ -74,28 +74,26 @@
 					<p:commandButton icon="ui-icon-trash" title="Excluir" type="button"
 						onclick="PF('confirmacao').show();" />
 
-					<p:dialog header="Confirmação" widgetVar="confirmacao" modal="true"
-						height="120">
-
-						<div align="left">
-							<h:outputText value="Deseja realmente excluir o registro?" />
-						</div>
-
-						<div align="center">
-							<br />
-							<p:commandButton value="Sim"
-								action="#{ambienteBean.excluir(ambiente)}" icon="ui-icon-check"
-								ajax="false">
-								<f:param name="idAmbiente" value="#{ambiente.id}" />
-							</p:commandButton>
-
-							<p:commandButton value="Não" icon="ui-icon-close"
-								onclick="PF('confirmacao').close();" />
-						</div>
-					</p:dialog>
-
 				</p:column>
 			</p:dataTable>
+			<p:dialog header="Confirmação" widgetVar="confirmacao" modal="true"
+				height="120">
+
+				<div align="left" lang="120">
+					<h:outputText value="Deseja realmente excluir o registro?" />
+				</div>
+				<div align="center" lang="120">
+					<br />
+					<p:commandButton value="Sim"
+						action="#{ambienteBean.excluir(ambiente)}" icon="ui-icon-check"
+						ajax="false">
+						<f:param name="idAmbiente" value="#{ambiente.id}" />
+					</p:commandButton>
+
+					<p:commandButton value="Não" icon="ui-icon-close"
+						onclick="PF('confirmacao').close();" />
+				</div>
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

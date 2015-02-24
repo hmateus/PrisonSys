@@ -52,10 +52,15 @@
 					<f:selectItem itemLabel="Selecione" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItem itemLabel="Baixa" itemValue="Baixa" />
-					<f:selectItem itemLabel="Média" itemValue="Media" />
+					<f:selectItem itemLabel="Média" itemValue="Média" />
 					<f:selectItem itemLabel="Alta" itemValue="Alta" />
 				</h:selectOneMenu>
 
+				<p:outputLabel value="Atividades" for="picklistAtividades"/>
+				<p:pickList id="picklistAtividades"
+					value="#{picklistBean.atividades}" var="atividade" itemLabel="#{atividade.nome}"
+					itemValue="#{atividade}"/>
+					
 				<p:outputLabel
 					value="#{msg['jailsysweb.ambiente.form.label.ativo']}" for="ativo" />
 				<p:selectBooleanCheckbox id="ativo"

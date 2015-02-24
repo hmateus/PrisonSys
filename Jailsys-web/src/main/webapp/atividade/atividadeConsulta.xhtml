@@ -48,18 +48,22 @@
 
 					<p:commandButton icon="ui-icon-trash" title="Excluir" type="button"
 						onclick="PF('confirmacao').show();" />
-
-					<p:dialog header="Confirmação" widgetVar="confirmacao" modal="true"
-						height="100">
-						<h:outputText value="Deseja realmente excluir?" />
-						<p:commandButton value="Sim" action="#{atividadeBean.excluir(atividade)}"
-							ajax="false">
-							<f:param name="idAtividade" value="#{atividade.id}"></f:param>
-						</p:commandButton>
-						<p:commandButton value="Não" onclick="PF('confirmacao').close();"></p:commandButton>
-					</p:dialog>
 				</p:column>
 			</p:dataTable>
+			<p:dialog header="Confirmação" widgetVar="confirmacao" modal="true"
+				height="120">
+				<div align="left" lang="120">
+					<h:outputText value="Deseja realmente excluir?" />
+				</div>
+				<div align="center" lang="120">
+					<br />
+					<p:commandButton value="Sim"
+						action="#{atividadeBean.excluir(atividade)}" ajax="false">
+						<f:param name="idAtividade" value="#{atividade.id}"></f:param>
+					</p:commandButton>
+					<p:commandButton value="Não" onclick="PF('confirmacao').close();"></p:commandButton>
+				</div>
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

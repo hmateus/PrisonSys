@@ -47,5 +47,5 @@ public class GenericConverter implements Converter {
 	private Map<String, Object> getAttributesFrom(UIComponent component) {
 		return component.getAttributes();
 	}
-
+	
 }

@@ -17,8 +17,15 @@ public class AtividadeDAO extends GenericDAO<Atividade> implements Serializable 
 
 	public List<Atividade> listarPorAtivo() {
 		return getEntityManager().createQuery(
-				"FROM Atividade a where a.ativo = true")
-				.getResultList();
+				"FROM Atividade a WHERE a.ativo = true").getResultList();
+	}
+
+	public List<Atividade> listarDesvinculadas() {
+		return getEntityManager().createQuery("").getResultList();
+	}
+
+	public List<Atividade> listarVinculadas() {
+		return getEntityManager().createQuery("SELECT ").getResultList();
 	}
 
 }
