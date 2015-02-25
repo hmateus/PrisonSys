@@ -45,10 +45,9 @@ public class Ambiente extends EntidadeComum implements Serializable {
     private boolean ativo;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "atividadeAmbiente",
+    @JoinTable(name = "atividadeambiente",
             joinColumns = @JoinColumn(name = "idAmbiente"),
             inverseJoinColumns = @JoinColumn(name = "idAtividade"))
-    
     private List<Atividade> atividades;
     
     public String getNome() {

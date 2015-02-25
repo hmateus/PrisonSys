@@ -22,10 +22,11 @@ public class AtividadeService implements AbstractService<EntidadeComum> {
     }
     
     public List<Atividade> listarDesvinculadas(){
-    	return atividadeDAO.listarDesvinculadas();
+    	return null;
     }
     
     public List<Atividade> listarVinculadas(){
+    	
     	return atividadeDAO.listarVinculadas();
     }
 

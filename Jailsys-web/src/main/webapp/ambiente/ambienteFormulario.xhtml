@@ -58,8 +58,8 @@
 
 				<p:outputLabel value="Atividades" for="picklistAtividades"/>
 				<p:pickList id="picklistAtividades"
-					value="#{picklistBean.atividades}" var="atividade" itemLabel="#{atividade.nome}"
-					itemValue="#{atividade}"/>
+					value="#{atividadeBean.atividadesDualList}" var="atividade" itemLabel="#{atividade.nome}"
+					itemValue="#{atividade}" converter="genericConverter"/>
 					
 				<p:outputLabel
 					value="#{msg['jailsysweb.ambiente.form.label.ativo']}" for="ativo" />

@@ -1,11 +1,14 @@
 package br.com.jailsys.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+
+import org.primefaces.model.DualListModel;
 
 import br.com.jailsys.bean.basic.AbstractBean;
 import br.com.jailsys.model.Atividade;
@@ -27,6 +30,12 @@ public class AtividadeBean implements Serializable, AbstractBean<EntidadeComum> 
 	@Inject
 	private AtividadeView atividadeView;
 
+	private List<Atividade> atividadesDesvinculadas;
+
+	private List<Atividade> atividadesVinculadas;
+
+	private DualListModel<Atividade> atividadesDualList;
+
 	public List<Atividade> listarPorAtivo() {
 		if (atividadeView.getAtividades().isEmpty()) {
 			atualizarView();
@@ -41,6 +50,9 @@ public class AtividadeBean implements Serializable, AbstractBean<EntidadeComum> 
 
 	@Override
 	public String salvar() {
+		atividadesDesvinculadas = atividadesDualList.getSource();
+		atividadesVinculadas = atividadesDualList.getTarget();
+		
 		service.salvar(atividadeView.getAtividade());
 		atualizarView();
 		FacesUtil
@@ -81,6 +93,35 @@ public class AtividadeBean implements Serializable, AbstractBean<EntidadeComum> 
 
 	public void setAtividadeView(AtividadeView atividadeView) {
 		this.atividadeView = atividadeView;
+	}
+
+	public List<Atividade> getAtividadesDesvinculadas() {
+		return atividadesDesvinculadas;
+	}
+
+	public void setAtividadesDesvinculadas(List<Atividade> atividadesDesvinculadas) {
+		this.atividadesDesvinculadas = atividadesDesvinculadas;
+	}
+
+	public List<Atividade> getAtividadesVinculadas() {
+		return atividadesVinculadas;
+	}
+
+	public void setAtividadesVinculadas(List<Atividade> atividadesVinculadas) {
+		this.atividadesVinculadas = atividadesVinculadas;
+	}
+
+	public DualListModel<Atividade> getAtividadesDualList() {
+		atividadesDesvinculadas = service.listarPorAtivo();//listarDesvinculadas();
+		atividadesVinculadas = service.listarVinculadas(); //new ArrayList<Atividade>();
+		
+		atividadesDualList = new DualListModel<Atividade>(atividadesDesvinculadas, atividadesVinculadas);
+		
+		return atividadesDualList;
+	}
+
+	public void setAtividadesDualList(DualListModel<Atividade> atividadesDualList) {
+		this.atividadesDualList = atividadesDualList;
 	}
 
 }

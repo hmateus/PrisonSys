@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.management.Query;
 
 import br.com.jailsys.model.Atividade;
 
@@ -19,13 +20,19 @@ public class AtividadeDAO extends GenericDAO<Atividade> implements Serializable 
 		return getEntityManager().createQuery(
 				"FROM Atividade a WHERE a.ativo = true").getResultList();
 	}
-
+	
 	public List<Atividade> listarDesvinculadas() {
-		return getEntityManager().createQuery("").getResultList();
+		return getEntityManager()
+				.createNativeQuery(
+						"SELECT * FROM atividade a WHERE a.id NOT IN (SELECT aa.idAtividade FROM atividadeambiente aa WHERE aa.idAmbiente = 3);")
+				.getResultList();
 	}
 
 	public List<Atividade> listarVinculadas() {
-		return getEntityManager().createQuery("SELECT ").getResultList();
+		return getEntityManager()
+				.createNativeQuery(
+						"SELECT * FROM atividade a WHERE a.id IN (SELECT aa.idAtividade FROM atividadeambiente aa WHERE aa.idAmbiente = 3);")
+				.getResultList();
 	}
 
 }

@@ -40,7 +40,7 @@ public class AmbienteBean implements AbstractBean<EntidadeComum>, Serializable {
 	}
 
 	@Override
-	public String salvar() {
+	public String salvar() {		
 		service.salvar(ambienteView.getAmbiente());
 		FacesUtil.mostrarMensagemSucesso(Constantes.Ambiente.MENSAGEM_CADASTRO);
 		this.atualizarView();
